@@ -3,13 +3,7 @@ from flask_mysqldb import MySQL
 from app import *
 
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'echange_culturel_fsbm'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
-mysql = MySQL(app)
 
 # Route pour récupérer tous les événements
 @app.route('/events', methods=['GET'])
@@ -37,7 +31,7 @@ def add_event():
     return jsonify({'message': 'Événement ajouté avec succès'})
 
 # Route pour confirmer un événement
-@app.route('/events/confirm/<int:event_id>', methods=['POST'])
+@app.route('/events/<int:event_id>/confirm', methods=['POST'])
 def confirm_event(event_id):
     cur = mysql.connection.cursor()
     cur.execute("UPDATE events SET isConfirmed = 1 WHERE id = %s", (event_id,))
