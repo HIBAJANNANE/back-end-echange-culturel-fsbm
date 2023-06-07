@@ -36,7 +36,6 @@ def logout():
 
 # Route pour le sign up
 @app.route('/signUp', methods=['POST'])
-@cross_origin()
 def signup():
     # Récupérer les données d'inscription depuis la requête POST
     data = request.get_json()
